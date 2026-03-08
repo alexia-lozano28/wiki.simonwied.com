@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Hell</button>
+
 <div class="layout">
   <!-- SIDEBAR -->
   <nav class="sidebar">
@@ -834,6 +836,24 @@ document.querySelectorAll('.subcategory:first-of-type .sub-header').forEach(h =>
 
 // Animate progress bar on load
 setTimeout(() => updateProgress(), 300);
+
+// Theme toggle
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'light' ? '☾ Dunkel' : '☀ Hell';
+  localStorage.setItem('theme', next);
+}
+
+// Apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('themeBtn').textContent = saved === 'light' ? '☾ Dunkel' : '☀ Hell';
+  });
+})();
 </script>
 </body>
 </html>

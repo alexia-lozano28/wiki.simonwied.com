@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Hell</button>
+
 <div class="layout">
 
   <!-- ── SIDEBAR ── -->
@@ -32,18 +34,6 @@
       </a>
     </div>
 
-    <div class="nav-section" style="margin-top:8px">
-      <div class="nav-section-title">Coming Soon</div>
-      <div class="nav-item" style="opacity:0.4;cursor:default">
-        <div class="dot" style="background:var(--muted)"></div> Networking
-      </div>
-      <div class="nav-item" style="opacity:0.4;cursor:default">
-        <div class="dot" style="background:var(--muted)"></div> Linux
-      </div>
-      <div class="nav-item" style="opacity:0.4;cursor:default">
-        <div class="dot" style="background:var(--muted)"></div> Programming
-      </div>
-    </div>
   </nav>
 
   <!-- ── MAIN ── -->
@@ -102,19 +92,6 @@
         </div>
       </a>
 
-      <!-- Coming soon placeholders -->
-      <div class="card-placeholder" data-tags="">
-        <div class="card-icon">🌐</div>
-        <div class="card-title">Networking Basics</div>
-        <div class="card-desc">// coming soon</div>
-      </div>
-
-      <div class="card-placeholder" data-tags="">
-        <div class="card-icon">🐧</div>
-        <div class="card-title">Linux & Shell</div>
-        <div class="card-desc">// coming soon</div>
-      </div>
-
     </div>
 
     <!-- Footer -->
@@ -147,6 +124,24 @@ document.addEventListener('keydown', e => {
 // Footer date
 document.getElementById('footerDate').textContent =
   new Date().toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Theme toggle
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'light' ? '☾ Dunkel' : '☀ Hell';
+  localStorage.setItem('theme', next);
+}
+
+// Apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('themeBtn').textContent = saved === 'light' ? '☾ Dunkel' : '☀ Hell';
+  });
+})();
 </script>
 </body>
 </html>

@@ -16,6 +16,46 @@
   --code-bg: #0a0a12;
 }
 
+[data-theme="light"] {
+  --bg: #f2f2f6;
+  --surface: #ffffff;
+  --surface2: #e8e8f0;
+  --border: #d0d0e0;
+  --accent: #009955;
+  --accent2: #dd2244;
+  --accent3: #2255cc;
+  --accent4: #bb7700;
+  --text: #1a1a2a;
+  --muted: #666680;
+  --code-bg: #1e1e2e;
+}
+
+/* In light mode, the grid overlay is too prominent */
+[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 100;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--muted); }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
