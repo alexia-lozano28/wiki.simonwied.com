@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEITENTITEL – wiki.simonwied.com</title>
+<!--
+  ANLEITUNG: Neue Seite hinzufügen
+  ─────────────────────────────────
+  1. Diese Datei kopieren, umbenennen (z.B. "linux.html")
+  2. SEITENTITEL oben anpassen
+  3. Sidebar: Kategorie und Seitenname eintragen
+  4. page-header: Titel + Beschreibung anpassen
+  5. Kategorien und Abschnitte befüllen (Beispiele unten)
+  6. In index.html einen neuen Eintrag unter der richtigen Kategorie hinzufügen
+
+  In index.html einfach hinzufügen:
+  <a href="linux.html" class="card cat-other" data-tags="linux shell bash ...">
+    <div class="card-top">
+      <span class="card-icon">🐧</span>
+      <span class="card-badge" style="background:rgba(68,136,255,0.12);color:#4488ff;border:1px solid rgba(68,136,255,0.3)">LINUX</span>
+    </div>
+    <div class="card-title">Linux & Shell</div>
+    <div class="card-desc">Kurzbeschreibung was drin ist.</div>
+    <div class="card-footer">
+      <span class="card-tag">Kategorie</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+-->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="web-hacking.css">
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Hell</button>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" style="text-decoration:none">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);font-weight:700;letter-spacing:0.04em">wiki.simonwied.com</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px">// wissensbasis</div>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Wiki</div>
+      <a href="index.html" class="nav-item">
+        <div class="dot" style="background:var(--accent)"></div> ← Startseite
+      </a>
+    </div>
+
+    <!-- Abschnitte dieser Seite — für jeden <div class="category"> einen Eintrag -->
+    <div class="nav-section" style="margin-top:4px">
+      <div class="nav-section-title">Auf dieser Seite</div>
+      <a href="#abschnitt1" class="nav-item active">
+        <div class="dot" style="background:#4488ff"></div> Abschnitt 1
+      </a>
+      <a href="#abschnitt2" class="nav-item">
+        <div class="dot" style="background:#ffaa00"></div> Abschnitt 2
+      </a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <!-- Breadcrumb -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:32px;display:flex;align-items:center;gap:8px">
+      <a href="index.html" style="color:var(--muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">wiki.simonwied.com</a>
+      <span style="color:var(--border)">/</span>
+      <span style="color:var(--accent)">SEITENTITEL</span>
+    </div>
+
+    <!-- Seitenheader -->
+    <div class="page-header" id="intro">
+      <span class="page-emoji">📄</span>
+      <h1 class="page-title">SEITENTITEL</h1>
+      <p class="page-subtitle">Kurze Beschreibung worum es auf dieser Seite geht.</p>
+      <div class="page-meta">
+        <span class="tag">Tag 1</span>
+        <span class="tag">Tag 2</span>
+      </div>
+    </div>
+
+    <!-- Optionaler Hinweis-Block -->
+    <!--
+    <div class="callout">
+      <span class="callout-icon">ℹ️</span>
+      <div>Hier kommt ein wichtiger Hinweis hin.</div>
+    </div>
+    -->
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════
+         KATEGORIE 1
+         id muss mit dem Sidebar-Link übereinstimmen
+    ══════════════════════════════════════════ -->
+    <div class="category" id="abschnitt1">
+      <div class="category-header">
+        <span class="category-badge" style="background:rgba(68,136,255,0.12);color:#4488ff;border:1px solid rgba(68,136,255,0.3)">🔷 Label</span>
+        <h2 class="cat-title">Abschnitt 1</h2>
+        <div class="cat-line"></div>
+      </div>
+
+      <!-- Eintrag (aufklappbar) -->
+      <div class="subcategory">
+        <div class="sub-header" onclick="toggle(this)">
+          <div class="sub-icon" style="background:rgba(68,136,255,0.1)">📌</div>
+          <span class="sub-title">Titel des Eintrags</span>
+          <span class="sub-arrow">▶</span>
+        </div>
+        <div class="sub-content">
+          <!-- Schwierigkeitsgrad / Wichtigkeit (optional) -->
+          <!-- <span class="severity sev-high">● HIGH</span> -->
+
+          <p class="sub-desc">
+            Erklärender Text. Was ist das, warum ist es wichtig?
+          </p>
+
+          <!-- Code-Block (optional) -->
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash · Beispiel</span>
+              <div class="code-dots"><span></span><span></span><span></span></div>
+            </div>
+            <pre><span class="hl-comment"># Kommentar</span>
+<span class="hl-func">befehl</span> --option <span class="hl-str">wert</span>
+
+<span class="hl-comment"># Ergebnis:</span>
+<span class="hl-good">Erfolgreiche Ausgabe hier</span>
+<span class="hl-danger">Gefährliche Ausgabe hier</span></pre>
+          </div>
+
+          <!-- Stichpunkte / Notizen (optional) -->
+          <div class="defense-block">
+            <h4>📝 Notizen</h4>
+            <ul>
+              <li>Wichtiger Punkt 1</li>
+              <li>Wichtiger Punkt 2</li>
+              <li>Wichtiger Punkt 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weiterer Eintrag — einfach kopieren -->
+      <div class="subcategory">
+        <div class="sub-header" onclick="toggle(this)">
+          <div class="sub-icon" style="background:rgba(255,170,0,0.1)">📎</div>
+          <span class="sub-title">Zweiter Eintrag</span>
+          <span class="sub-arrow">▶</span>
+        </div>
+        <div class="sub-content">
+          <p class="sub-desc">Beschreibung des zweiten Eintrags.</p>
+
+          <!-- Tabelle (optional) -->
+          <table class="info-table">
+            <tr><th>Spalte A</th><th>Spalte B</th><th>Spalte C</th></tr>
+            <tr><td>Wert 1</td><td>Wert 2</td><td>Wert 3</td></tr>
+            <tr><td>Wert 4</td><td>Wert 5</td><td>Wert 6</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         KATEGORIE 2 — einfach die ganze category-div kopieren
+    ══════════════════════════════════════════ -->
+    <div class="category" id="abschnitt2">
+      <div class="category-header">
+        <span class="category-badge" style="background:rgba(255,170,0,0.12);color:#ffaa00;border:1px solid rgba(255,170,0,0.3)">🔶 Label</span>
+        <h2 class="cat-title">Abschnitt 2</h2>
+        <div class="cat-line"></div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-header" onclick="toggle(this)">
+          <div class="sub-icon" style="background:rgba(255,170,0,0.1)">🗒️</div>
+          <span class="sub-title">Eintrag in Abschnitt 2</span>
+          <span class="sub-arrow">▶</span>
+        </div>
+        <div class="sub-content">
+          <p class="sub-desc">Inhalt hier.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-align:center;padding-bottom:60px">
+      // wiki.simonwied.com
+    </p>
+  </main>
+</div>
+
+<script>
+function toggle(header) {
+  const arrow = header.querySelector('.sub-arrow');
+  const content = header.nextElementSibling;
+  arrow.classList.toggle('open');
+  content.classList.toggle('open');
+}
+
+// Smooth scroll + aktive Nav-Markierung
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+
+// Ersten Eintrag jeder Kategorie standardmäßig öffnen
+document.querySelectorAll('.subcategory:first-of-type .sub-header').forEach(h => toggle(h));
+
+// Theme toggle
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'light' ? '☾ Dunkel' : '☀ Hell';
+  localStorage.setItem('theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('themeBtn').textContent = saved === 'light' ? '☾ Dunkel' : '☀ Hell';
+  });
+})();
+</script>
+</body>
+</html>
