@@ -27,6 +27,12 @@ document.addEventListener('keydown', e => {
 document.getElementById('footerDate').textContent =
   new Date().toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
 
+// ─── Stats ───────────────────────────────────────────────
+const cards = document.querySelectorAll('#cardGrid .card');
+document.getElementById('statArticles').textContent = cards.length;
+document.getElementById('statCategories').textContent =
+  document.querySelectorAll('.section-header').length;
+
 // ─── Theme ───────────────────────────────────────────────
 function toggleTheme() {
   const isLight = document.documentElement.getAttribute('data-theme') === 'light';
