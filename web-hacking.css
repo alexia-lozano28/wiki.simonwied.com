@@ -213,7 +213,7 @@ body::before {
   margin-bottom: 32px;
   font-size: 14px;
   line-height: 1.6;
-  color: #b0b0d0;
+  color: var(--text);
 }
 
 .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
@@ -309,7 +309,7 @@ body::before {
 .sub-desc {
   font-size: 14px;
   line-height: 1.7;
-  color: #b0b0cc;
+  color: var(--text);
   margin-bottom: 16px;
 }
 
@@ -337,7 +337,7 @@ body::before {
   gap: 10px;
   align-items: flex-start;
   font-size: 13px;
-  color: #a0a0c0;
+  color: var(--text);
   line-height: 1.5;
 }
 
@@ -447,7 +447,7 @@ pre {
 
 .defense-block ul li {
   font-size: 13px;
-  color: #90c0a0;
+  color: var(--text);
   display: flex;
   gap: 8px;
 }
@@ -480,7 +480,7 @@ pre {
 .info-table td {
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: #b0b0cc;
+  color: var(--text);
   vertical-align: top;
   line-height: 1.5;
 }
