@@ -86,27 +86,6 @@
       </div>
     </div>
 
-    <!-- PROGRESS -->
-    <div class="progress-section">
-      <div class="progress-label">
-        <span>Dein Lernfortschritt</span>
-        <span id="pct">0 / 8 Themen</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="topics-grid" id="topicsGrid">
-        <div class="topic-chip" onclick="markTopic(this)">Authentication</div>
-        <div class="topic-chip" onclick="markTopic(this)">SQL Injection</div>
-        <div class="topic-chip" onclick="markTopic(this)">XSS</div>
-        <div class="topic-chip" onclick="markTopic(this)">CSRF</div>
-        <div class="topic-chip" onclick="markTopic(this)">IDOR</div>
-        <div class="topic-chip" onclick="markTopic(this)">Command Injection</div>
-        <div class="topic-chip" onclick="markTopic(this)">Recon</div>
-        <div class="topic-chip" onclick="markTopic(this)">Tools</div>
-      </div>
-    </div>
-
     <div class="divider"></div>
 
     <!-- ============ CATEGORY 1: AUTHENTICATION ============ -->
@@ -713,14 +692,6 @@ function markTopic(chip) {
     chip.style.borderColor = '';
     chip.style.color = '';
   }
-  updateProgress();
-}
-
-function updateProgress() {
-  const chips = document.querySelectorAll('.topic-chip');
-  const done = document.querySelectorAll('.topic-chip.done').length;
-  document.getElementById('pct').textContent = done + ' / ' + chips.length + ' Themen';
-  document.getElementById('progressFill').style.width = (done / chips.length * 100) + '%';
 }
 
 // Smooth scroll for nav links
@@ -742,9 +713,6 @@ document.querySelectorAll('.category').forEach((cat, i) => {
 document.querySelectorAll('.subcategory:first-of-type .sub-header').forEach(h => {
   toggle(h);
 });
-
-// Animate progress bar on load
-setTimeout(() => updateProgress(), 300);
 
 // Theme toggle
 function toggleTheme() {

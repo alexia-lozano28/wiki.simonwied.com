@@ -511,60 +511,6 @@ pre {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.progress-section {
-  margin-bottom: 32px;
-  padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.progress-bar {
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
-  transition: width 1s ease;
-  width: 0%;
-}
-
-.topics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
-}
-
-.topic-chip {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  padding: 6px 10px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-  text-align: center;
-}
-
-.topic-chip:hover { border-color: var(--accent); color: var(--accent); }
-
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
