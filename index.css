@@ -140,22 +140,16 @@ body::before {
 }
 
 .hero-title {
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.05;
-  background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  line-height: 1;
+  color: var(--text);
   margin-bottom: 16px;
 }
 
-.hero-title span {
-  background: linear-gradient(135deg, var(--accent), var(--accent3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.hero-dot {
+  color: var(--accent);
 }
 
 .hero-sub {
