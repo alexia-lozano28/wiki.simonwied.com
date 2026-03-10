@@ -1,3 +1,9 @@
+// ─── Google Analytics ────────────────────────────────────
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-2YXVEH3ZW6');
+
 // ─── Search ──────────────────────────────────────────────
 function filterCards() {
   const q = document.getElementById('searchInput').value.toLowerCase();

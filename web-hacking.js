@@ -1,8 +1,10 @@
+// ─── Google Analytics ────────────────────────────────────
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-2YXVEH3ZW6');
+
 function toggle(header) {
-  const arrow = header.querySelector('.sub-arrow');
-  const content = header.nextElementSibling;
-  arrow.classList.toggle('open');
-  content.classList.toggle('open');
 }
 
 function markTopic(chip) {
