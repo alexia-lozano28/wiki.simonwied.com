@@ -11,17 +11,29 @@ function toggle(header) {
   if (arrow) arrow.classList.toggle('open');
 }
 
-function markTopic(chip) {
-  chip.classList.toggle('done');
-  if (chip.classList.contains('done')) {
-    chip.style.background = 'rgba(0,255,136,0.12)';
-    chip.style.borderColor = 'rgba(0,255,136,0.4)';
-    chip.style.color = '#00ff88';
-  } else {
-    chip.style.background = '';
-    chip.style.borderColor = '';
-    chip.style.color = '';
-  }
+function toggleCategory(header) {
+  const content = header.nextElementSibling;
+  const arrow = header.querySelector('.sub-arrow');
+  if (content) content.classList.toggle('open');
+  if (arrow) arrow.classList.toggle('open');
+}
+
+// ─── Servings calculator ─────────────────────────────────
+const BASE_SERVINGS = 4;
+let currentServings = 4;
+
+function changeServings(delta) {
+  currentServings = Math.max(1, currentServings + delta);
+  document.getElementById('servingCount').textContent = currentServings;
+  const factor = currentServings / BASE_SERVINGS;
+  document.querySelectorAll('#ingredientTable td[data-base], #ingredientTable2 td[data-base], #ingredientTable3 td[data-base], #spaetzleTable td[data-base]').forEach(td => {
+    const base = parseFloat(td.dataset.base);
+    const unit = td.dataset.unit;
+    const qty = td.querySelector('.qty');
+    if (!qty) return;
+    const val = base * factor;
+    qty.textContent = Number.isInteger(val) ? val : val % 1 === 0.5 ? val : Math.round(val * 10) / 10;
+  });
 }
 
 // Smooth scroll + active nav highlight
@@ -46,6 +58,9 @@ document.querySelectorAll('.sub-header').forEach(h => {
 
 // Open first subcategory in each category by default
 document.querySelectorAll('.subcategory:first-of-type .sub-header').forEach(h => toggle(h));
+
+// Open all category-content sections by default
+document.querySelectorAll('.category-header[onclick]').forEach(h => toggleCategory(h));
 
 // ─── Sidebar Toggle & Resize ─────────────────────────────
 (function () {
@@ -102,4 +117,3 @@ document.querySelectorAll('.subcategory:first-of-type .sub-header').forEach(h =>
     localStorage.setItem(WIDTH_KEY, parseInt(sidebar.style.width));
   });
 })();
-

@@ -5,6 +5,10 @@ gtag('js', new Date());
 gtag('config', 'G-G07DY445N4');
 
 function toggle(header) {
+  const content = header.nextElementSibling;
+  const arrow = header.querySelector('.sub-arrow');
+  if (content) content.classList.toggle('open');
+  if (arrow) arrow.classList.toggle('open');
 }
 
 // Smooth scroll + aktive Nav-Markierung
