@@ -306,8 +306,19 @@ body::before {
 
 .sub-content.open { display: block; }
 
+.category-content {
+  display: none;
+  padding: 16px 20px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.category-content.open { display: block; }
+
 .sub-desc {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
   color: var(--text);
   margin-bottom: 16px;
@@ -336,7 +347,7 @@ body::before {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text);
   line-height: 1.5;
 }
@@ -477,10 +488,16 @@ pre {
   border-bottom: 1px solid var(--border);
 }
 
+.info-table td:first-child,
+.info-table th:first-child {
+  width: 120px;
+}
+
 .info-table td {
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
   color: var(--text);
+  font-size: 15px;
   vertical-align: top;
   line-height: 1.5;
 }
