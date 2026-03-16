@@ -1,4 +1,4 @@
-const SITE_VERSION = '1.3.1';
+const SITE_VERSION = '1.4.1';
 
 document.addEventListener('DOMContentLoaded', function () {
   var el = document.getElementById('siteVersion');
