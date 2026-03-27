@@ -26,7 +26,16 @@ function changeServings(delta) {
   currentServings = Math.max(1, currentServings + delta);
   document.getElementById('servingCount').textContent = currentServings;
   const factor = currentServings / BASE_SERVINGS;
+  // Masse
   document.querySelectorAll('#ingredientTable td[data-base], #ingredientTableSauce td[data-base]').forEach(td => {
+    const base = parseFloat(td.dataset.base);
+    const qty = td.querySelector('.qty');
+    if (!qty || Number.isNaN(base)) return;
+    const val = base * factor;
+    qty.textContent = Number.isInteger(val) ? val : val % 1 === 0.5 ? val : Math.round(val * 10) / 10;
+  });
+  // Panieren (außer Öl)
+  document.querySelectorAll('#ingredientTable2 td[data-base]').forEach(td => {
     const base = parseFloat(td.dataset.base);
     const qty = td.querySelector('.qty');
     if (!qty || Number.isNaN(base)) return;
